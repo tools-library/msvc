@@ -4,7 +4,7 @@ SETLOCAL ENABLEDELAYEDEXPANSION
 
 
 :PROCESS_CMD
-    CALL "%utility_folder%..\utils\setup.cmd" cecho vswhere
+    CALL "%utility_folder%..\win-utils\setup.cmd" cecho vswhere
 
     SET help_val=false
     SET version_val=
