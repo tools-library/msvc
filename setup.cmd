@@ -157,11 +157,12 @@ EXIT /B 0
     ECHO # ARGUMENTS:                                                          #
     ECHO #     -h^|--help    Print this help and exit.                          #
     ECHO #                                                                     #
-    ECHO #     --version    A version range for instances to find. Example:    #
-    ECHO #         [15.0,16.0) will find versions 15.*. OBS: Arg must be       # 
-    ECHO #         "quoted". More info about this version format can be found  #
-    ECHO #         in the following url                                        #
-    ECHO #         https://github.com/microsoft/vswhere/wiki/Examples          #
+    ECHO #     --version    A version range for instances of VS to             #
+    ECHO #         find. Example: '[16.6,)' will find a VS with version equal  # 
+    ECHO #         to or greater than '16.6'. OBS: Arg must be "quoted". More  #
+    ECHO #         info about this version format can be found at the          #
+    ECHO #         following url                                               #
+    ECHO #         https://github.com/microsoft/vswhere/wiki/Examples.         #
     ECHO #                                                                     #
     ECHO #     --arch    Must be one of the following values: x32, x64,        #
     ECHO #         x32_x64, x64_x32, x32_arm32, x32_arm64, x64_arm32,          #
