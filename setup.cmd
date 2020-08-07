@@ -150,16 +150,16 @@ EXIT /B 0
     ECHO # ARCH   : x32                                                        #
     ECHO #                                                                     #
     ECHO # USAGE:                                                              #
-    ECHO #   %SCRIPT_NAME% {-h^|--help ^| --vs-version "version" --arch arch }          #
+    ECHO #   %SCRIPT_NAME% {-h^|--help ^| --vs-version "version" --arch arch }       #
     ECHO #                                                                     #
     ECHO # EXAMPLES:                                                           #
     ECHO #     %script_name% -h                                                    #
-    ECHO #     %script_name% --vs-version "[15,]" --arch x64                          #
+    ECHO #     %script_name% --vs-version "[15,]" --arch x64                       #
     ECHO #                                                                     #
     ECHO # ARGUMENTS:                                                          #
     ECHO #     -h^|--help    Print this help and exit.                          #
     ECHO #                                                                     #
-    ECHO #     --vs-version    A version range for instances of VS to             #
+    ECHO #     --vs-version    A version range for instances of VS to          #
     ECHO #         find. Example: '[16.6,)' will find a VS with version equal  # 
     ECHO #         to or greater than '16.6'. OBS: Arg must be "quoted". More  #
     ECHO #         info about this version format can be found at the          #
