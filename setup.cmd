@@ -8,7 +8,7 @@ SETLOCAL ENABLEDELAYEDEXPANSION
     CALL "%utility_folder%..\win-utils\setup.cmd" cecho vswhere
 
     SET help_val=false
-    SET version_val=
+    SET vs_version_val=
     SET arch_val=
     :LOOP
         SET current_arg=%1
@@ -18,9 +18,9 @@ SETLOCAL ENABLEDELAYEDEXPANSION
         IF [%current_arg%] EQU [--help] (
             SET help_val=true
         )
-        IF [%current_arg%] EQU [--version] (
+        IF [%current_arg%] EQU [--vs-version] (
             SHIFT
-            CALL SET "version_val=%%1"
+            CALL SET "vs_version_val=%%1"
         )
         IF [%current_arg%] EQU [--arch] (
             SHIFT
@@ -51,8 +51,8 @@ EXIT /B 0
 
 :MAIN
     REM This tool must be initialized only once.
-    IF [%version_val%] EQU [] (
-        CALL :SHOW_ERROR "Argument '--version' must be provided."
+    IF [%vs_version_val%] EQU [] (
+        CALL :SHOW_ERROR "Argument '--vs-version' must be provided."
         EXIT /B -3
     )
 
@@ -67,7 +67,7 @@ EXIT /B 0
 
     CALL :SHOW_INFO "Initialize command prompt."
 
-    FOR /f "usebackq tokens=*" %%i IN (`vswhere -nologo -version %version_val% -property installationPath`) DO (
+    FOR /f "usebackq tokens=*" %%i IN (`vswhere -nologo -version %vs_version_val% -property installationPath`) DO (
         SET vs_installation_path=%%i
     )
 
@@ -150,16 +150,16 @@ EXIT /B 0
     ECHO # ARCH   : x32                                                        #
     ECHO #                                                                     #
     ECHO # USAGE:                                                              #
-    ECHO #   %SCRIPT_NAME% {-h^|--help ^| --version "version" --arch arch }          #
+    ECHO #   %SCRIPT_NAME% {-h^|--help ^| --vs-version "version" --arch arch }       #
     ECHO #                                                                     #
     ECHO # EXAMPLES:                                                           #
     ECHO #     %script_name% -h                                                    #
-    ECHO #     %script_name% --version "[15,]" --arch x64                          #
+    ECHO #     %script_name% --vs-version "[15,]" --arch x64                       #
     ECHO #                                                                     #
     ECHO # ARGUMENTS:                                                          #
     ECHO #     -h^|--help    Print this help and exit.                          #
     ECHO #                                                                     #
-    ECHO #     --version    A version range for instances of VS to             #
+    ECHO #     --vs-version    A version range for instances of VS to          #
     ECHO #         find. Example: '[16.6,)' will find a VS with version equal  # 
     ECHO #         to or greater than '16.6'. OBS: Arg must be "quoted". More  #
     ECHO #         info about this version format can be found at the          #
