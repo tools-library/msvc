@@ -1,0 +1,45 @@
+
+                            M S V C
+
+    'MSVC' is a script to setup the Microsoft Visual C++
+     toolset.
+
+     After running the setup.cmd, with the appropriate
+     arguments, we can use the Microsoft C++ toolset from the
+     command line. The Microsoft Visual C++ toolset must be
+     installed beforehand.
+
+TOOL   : MSVC
+VERSION: 1.0.0
+ARCH   : x32
+
+USAGE:
+    setup.cmd {-h|--help | --vs-version "version" --arch arch }
+
+EXAMPLES:
+    setup.cmd -h
+    setup.cmd --vs-version "[15,]" --arch x64
+
+ARGUMENTS:
+    -h|--help    Print this help and exit.
+
+    --vs-version    A version range for instances of VS to
+        find. Example: '[16.6,)' will find a VS with version equal
+        to or greater than '16.6'. OBS: Arg must be "quoted". More
+        info about this version format can be found at the
+        following url
+        https://github.com/microsoft/vswhere/wiki/Examples.
+
+    --arch    Must be one of the following values: x32, x64,
+        x32_x64, x64_x32, x32_arm32, x32_arm64, x64_arm32,
+        x64_arm64.
+
+EXPORTED ENVIRONMENT VARIABLES:
+    TOOLSET_MSVC_INITIALIZED    A boolean indicating whether this
+        tool has already been initialized.
+
+    Any variables that are changed or added by 'msvc' configuration
+    script (vcvarsall.bat) will be exported.
+
+    The environment variables will be exported only if this script
+    executes without any error.

@@ -5,6 +5,8 @@ SETLOCAL ENABLEDELAYEDEXPANSION
 
 :PROCESS_CMD
     SET "utility_folder=%~dp0"
+
+    REM Load dependent tools...
     CALL "%utility_folder%..\win-utils\setup.cmd" cecho vswhere
 
     SET help_val=false
@@ -50,7 +52,7 @@ EXIT /B 0
 
 
 :MAIN
-    REM This tool must be initialized only once.
+    REM Validate some arguments.
     IF [%vs_version_val%] EQU [] (
         CALL :SHOW_ERROR "Argument '--vs-version' must be provided."
         EXIT /B -3
@@ -61,6 +63,7 @@ EXIT /B 0
         EXIT /B -3
     )
 
+    REM This tool must be initialized only once.
     IF DEFINED TOOLSET_MSVC_INITIALIZED (
         EXIT /B 0
     )
@@ -79,7 +82,7 @@ EXIT /B 0
         )
         SET vcvarsall_cmd=%base_cmd% !decoded_arch_val!
     ) ELSE (
-        CALL :SHOW_ERROR "Unable to find 'vcvarsall.bat' installed on your system based on your arguments."
+        CALL :SHOW_ERROR "Unable to find 'vcvarsall.bat' installed on your system based on the supplied arguments."
         EXIT /B -2
     )
 EXIT /B 0
@@ -127,11 +130,11 @@ EXIT /B -1
 
 
 :SHOW_INFO
-    cecho {olive}[TOOLSET - UTILS - MSVC]{default} INFO: %~1{\n}
+    cecho {olive}[TOOLSET - MSVC]{default} INFO: %~1{\n}
 EXIT /B 0
 
 :SHOW_ERROR
-    cecho {olive}[TOOLSET - UTILS - MSVC]{red} ERROR: %~1 {default} {\n}
+    cecho {olive}[TOOLSET - MSVC]{red} ERROR: %~1 {default} {\n}
 EXIT /B 0
 
 
@@ -140,13 +143,18 @@ EXIT /B 0
     SET "script_name=%~n0%~x0"
     ECHO #######################################################################
     ECHO #                                                                     #
-    ECHO #                      T O O L   S E T U P                            #
+    ECHO #                        T O O L   S E T U P                          #
     ECHO #                                                                     #
-    ECHO #                 'MSVC' a script to setup the                        #
-    ECHO #                Microsoft Visual C++ toolchain.                      #
+    ECHO #        'MSVC' is a script to setup the Microsoft Visual C++         #
+    ECHO #         toolset.                                                    #
+    ECHO #                                                                     #
+    ECHO #         After running the %SCRIPT_NAME%, with the appropriate           #
+    ECHO #         arguments, we can use the Microsoft C++ toolset from the    #
+    ECHO #         command line. The Microsoft Visual C++ toolset must be      #
+    ECHO #         installed beforehand.                                       #
     ECHO #                                                                     #
     ECHO # TOOL   : MSVC                                                       #
-    ECHO # VERSION: 2.8.4                                                      #
+    ECHO # VERSION: 1.0.0                                                      #
     ECHO # ARCH   : x32                                                        #
     ECHO #                                                                     #
     ECHO # USAGE:                                                              #
@@ -160,7 +168,7 @@ EXIT /B 0
     ECHO #     -h^|--help    Print this help and exit.                          #
     ECHO #                                                                     #
     ECHO #     --vs-version    A version range for instances of VS to          #
-    ECHO #         find. Example: '[16.6,)' will find a VS with version equal  # 
+    ECHO #         find. Example: '[16.6,)' will find a VS with version equal  #
     ECHO #         to or greater than '16.6'. OBS: Arg must be "quoted". More  #
     ECHO #         info about this version format can be found at the          #
     ECHO #         following url                                               #
@@ -173,7 +181,7 @@ EXIT /B 0
     ECHO # EXPORTED ENVIRONMENT VARIABLES:                                     #
     ECHO #     TOOLSET_MSVC_INITIALIZED    A boolean indicating whether this   #
     ECHO #         tool has already been initialized.                          #
-    ECHO #                                                                     # 
+    ECHO #                                                                     #
     ECHO #     Any variables that are changed or added by 'msvc' configuration #
     ECHO #     script (vcvarsall.bat^) will be exported.                        #
     ECHO #                                                                     #
