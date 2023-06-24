@@ -63,11 +63,6 @@ EXIT /B 0
         EXIT /B -3
     )
 
-    REM This tool must be initialized only once.
-    IF DEFINED TOOLSET_MSVC_INITIALIZED (
-        EXIT /B 0
-    )
-
     CALL :SHOW_INFO "Initialize command prompt."
 
     FOR /f "usebackq tokens=*" %%i IN (`vswhere -nologo -version %vs_version_val% -property installationPath`) DO (
